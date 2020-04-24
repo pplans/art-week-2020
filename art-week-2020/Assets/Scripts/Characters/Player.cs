@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,16 +9,15 @@ public class Player : Character
 {
 	#region Members
 
-	public GameObject cam;
-	
-    CapsuleCollider m_collider;
+
 
 	#endregion
 
 	#region UnityEvents
 	public override void Awake()
     {
-        m_collider = this.gameObject.GetComponent<CapsuleCollider>();
+        base.Awake(); // Call parent init
+
     }
 
 	public void Start()
@@ -27,14 +27,16 @@ public class Player : Character
 
 	#region Methods
 
-	public Player() : base()
-	{
-	}
+    public override bool IsPlayer() { return true; }
 
-	public override bool IsPlayer() { return true; }
-
-	public override void UpdateCharacter()
+    public override void UpdateCharacter()
     {
-	}
-	#endregion
+        base.UpdateCharacter(); // Call parent update
+        if (Input.GetKeyDown("space"))
+            DecreaseLife(1);
+        else if (Input.GetKeyDown("return"))
+            IncreaseLife(1);
+    }
+
+    #endregion
 }

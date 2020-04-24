@@ -4,42 +4,45 @@ using UnityEngine;
 
 public abstract class Character : WorldObject
 {
-	#region Members
+    #region Members
 
-	protected bool m_isAlive;
+    protected bool m_isAlive;
 
-	#endregion
+    [SerializeField]
+    protected int m_maxLife;
 
-	#region UnityEvents
+    protected int m_life;
 
-	public virtual void Awake()
-	{
-		m_isAlive = true;
-	}
+    [SerializeField]
+    protected float m_baseSpeed;
+
+    [SerializeField]
+    protected float m_minSpeed;
+
+    protected float m_speed;
+
+
+    #endregion
+
+    #region UnityEvents
+
+    public virtual void Awake()
+    {
+        m_isAlive = true;
+        m_life = m_maxLife;
+        m_speed = m_baseSpeed;
+    }
 
     #endregion
 
     #region Methods
 
-	public Character()
-	{
-		m_isAlive = true;
-	}
-
-	~Character()
-	{
-		m_isAlive = false;
-	}
-
-	public void Init()
-	{
-	}
-
-	public virtual void UpdateCharacter()
-	{
-       if(!m_isAlive)
-	   {
-	   }
+    public virtual void UpdateCharacter()
+    {
+        if (!m_isAlive)
+        {
+            Die();
+        }
     }
 
     public bool IsAlive()
@@ -50,7 +53,53 @@ public abstract class Character : WorldObject
     public void Die()
     {
         Debug.Log("Character is dead");
-        m_isAlive = false;
-	}
+        Destroy(gameObject);
+    }
+
+    public void IncreaseLife(int amount)
+    {
+        if (amount < 0)
+            return;
+
+        var newLife = m_life + amount;
+        if (newLife > m_maxLife)
+            newLife = m_maxLife;
+
+        m_life = newLife;
+        m_isAlive = m_life > 0;
+    }
+
+    public void DecreaseLife(int amount)
+    {
+        if (amount < 0)
+            return;
+
+        var newLife = m_life - amount;
+        if (newLife < 0)
+            newLife = 0;
+        m_life = newLife;
+        m_isAlive = m_life > 0;
+    }
+
+    public void IncreaseSpeed(float amount)
+    {
+        if (amount < 0)
+            return;
+
+        m_speed += amount;
+    }
+
+    public void DecreaseSpeed(float amount)
+    {
+        if (amount < 0)
+            return;
+
+        var newSpeed = m_speed - amount;
+        if (newSpeed < m_minSpeed)
+            newSpeed = m_minSpeed;
+
+        m_speed = newSpeed;
+    }
+
     #endregion
 }

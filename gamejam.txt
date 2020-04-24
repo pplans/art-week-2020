@@ -15,3 +15,7 @@ Obstacles, épaves, trésors
 ennemis (maritime : vaisseau à recolorier) [dépend du temps restant]
 
 zone en forme de cercle.
+
+Boulets de canon tirés sur le côté
+
+répartition des tâches : 

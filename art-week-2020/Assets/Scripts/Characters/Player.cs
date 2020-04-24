@@ -32,10 +32,7 @@ public class Player : Character
     public override void UpdateCharacter()
     {
         base.UpdateCharacter(); // Call parent update
-        if (Input.GetKeyDown("space"))
-            DecreaseLife(1);
-        else if (Input.GetKeyDown("return"))
-            IncreaseLife(1);
+
     }
 
     #endregion

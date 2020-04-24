@@ -1,0 +1,17 @@
+Gamejam
+
+Jeu d'exploration spatiale/maritime
+
+Objets à trouver dans une zone
+
+Brouillard
+
+Temps limité
+
+Randomly generated
+
+Obstacles, épaves, trésors
+
+ennemis (maritime : vaisseau à recolorier) [dépend du temps restant]
+
+zone en forme de cercle.

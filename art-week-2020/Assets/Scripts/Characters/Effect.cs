@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
-using Assets.Scripts.Base.Characters;
-using UnityEditor;
+﻿using Assets.Scripts.Base.Characters;
 using UnityEngine;
 
 namespace Assets.Scripts.Characters

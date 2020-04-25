@@ -11,35 +11,35 @@ namespace Assets.Scripts.Base.Characters
         public bool IsAlive
         {
             get;
-            set;
+            protected set;
         }
 
         [SerializeField]
-        protected int m_maxLife;
+        protected int MaxLife;
 
-        protected int m_life;
-
-        [SerializeField]
-        protected readonly float m_baseSpeed;
+        protected int Life;
 
         [SerializeField]
-        protected float m_minSpeed;
-
-        protected float m_speed;
+        protected readonly float BaseSpeed;
 
         [SerializeField]
-        protected float m_bonusSpeed;
+        protected float MinSpeed;
 
-        protected List<Effect> effects;
+        protected float Speed;
+
+        [SerializeField]
+        protected float BonusSpeed;
+
+        protected List<Effect> Effects;
         #endregion
 
         #region UnityEvents
         public virtual void Awake()
         {
             IsAlive = true;
-            m_life = m_maxLife;
-            m_speed = m_baseSpeed;
-            effects = new List<Effect>();
+            Life = MaxLife;
+            Speed = BaseSpeed;
+            Effects = new List<Effect>();
         }
         #endregion
 
@@ -57,9 +57,9 @@ namespace Assets.Scripts.Base.Characters
 
         private void UpdateEffects()
         {
-            for (var i = effects.Count - 1; i >= 0; i--)
+            for (var i = Effects.Count - 1; i >= 0; i--)
             {
-                effects[i].Update();
+                Effects[i].Update();
             }
         }
 
@@ -71,37 +71,37 @@ namespace Assets.Scripts.Base.Characters
 
         public void ModifyLife(int amount)
         {
-            var newLife = m_life + amount;
-            if (newLife > m_maxLife)
-                newLife = m_maxLife;
+            var newLife = Life + amount;
+            if (newLife > MaxLife)
+                newLife = MaxLife;
             else if (newLife < 0)
                 newLife = 0;
 
-            m_life = newLife;
-            IsAlive = m_life > 0;
+            Life = newLife;
+            IsAlive = Life > 0;
         }
 
         public void ModifySpeed(float amount)
         {
-            m_bonusSpeed += amount;
+            BonusSpeed += amount;
         }
 
         public void UpdateSpeed()
         {
-            var newSpeed = m_baseSpeed + m_bonusSpeed;
-            m_speed = (newSpeed < m_minSpeed) ? m_minSpeed : newSpeed;
+            var newSpeed = BaseSpeed + BonusSpeed;
+            Speed = (newSpeed < MinSpeed) ? MinSpeed : newSpeed;
         }
 
         public void AddEffect(Effect effect)
         {
-            effects.Add(effect);
+            Effects.Add(effect);
             effect.Apply();
         }
 
         public void RemoveEffect(Effect effect)
         {
             effect.Cancel();
-            effects.Remove(effect);
+            Effects.Remove(effect);
         }
         #endregion
     }

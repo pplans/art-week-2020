@@ -94,7 +94,7 @@
                 fixed3 Ndet = lerp(
 								UnpackNormal(tex2D(_NormTex, i.uv*_TileNormTex.xy+float2(1., .2)*_Time.xx))
 								, UnpackNormal(tex2D(_Norm2Tex, i.uv*_TileNormTex.xy - float2(1., .2)*_Time.xx))
-								, 0.33);
+								, 0.5);
 				float3 N = normalize(i.N+ Ndet);
 				float3 L = normalize(_LightDir);
 

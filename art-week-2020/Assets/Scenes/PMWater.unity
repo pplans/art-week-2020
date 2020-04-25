@@ -227,34 +227,6 @@ PrefabInstance:
       value: Water3D
       objectReference: {fileID: 0}
     - target: {fileID: 4952756192755158, guid: 85311974839d0df4fa1ba005c883b159, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4952756192755158, guid: 85311974839d0df4fa1ba005c883b159, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4952756192755158, guid: 85311974839d0df4fa1ba005c883b159, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4952756192755158, guid: 85311974839d0df4fa1ba005c883b159, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4952756192755158, guid: 85311974839d0df4fa1ba005c883b159, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4952756192755158, guid: 85311974839d0df4fa1ba005c883b159, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4952756192755158, guid: 85311974839d0df4fa1ba005c883b159, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4952756192755158, guid: 85311974839d0df4fa1ba005c883b159, type: 3}
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}

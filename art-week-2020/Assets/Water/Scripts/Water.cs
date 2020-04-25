@@ -297,9 +297,9 @@ public class Water : MonoBehaviour
 
 		outwnormal = Vector3.up;
         outwpos = wpos;
-        p1.y = WaterLib.sea_map(Offset + p1, time, sea_choppy, sea_level, sea_speed, sea_freq);
-		p2.y = WaterLib.sea_map(Offset + p2, time, sea_choppy, sea_level, sea_speed, sea_freq);
-		p3.y = WaterLib.sea_map(Offset + p3, time, sea_choppy, sea_level, sea_speed, sea_freq);
+        p1.y = WaterLib.sea_map(transform.position + p1, time, sea_choppy, sea_level, sea_speed, sea_freq);
+		p2.y = WaterLib.sea_map(transform.position + p2, time, sea_choppy, sea_level, sea_speed, sea_freq);
+		p3.y = WaterLib.sea_map(transform.position + p3, time, sea_choppy, sea_level, sea_speed, sea_freq);
 		outwnormal = Vector3.Cross(p3-p1, p2-p1);
 		outwnormal.y = Mathf.Abs(outwnormal.y);
 		outwpos.y = 0.33f * (p1.y + p2.y + p3.y);

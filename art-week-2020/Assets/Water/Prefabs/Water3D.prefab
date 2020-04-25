@@ -62,7 +62,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_material: {fileID: 2100000, guid: 16a8b38dd7e61564a8fe80f055e09a93, type: 2}
   timeScale: 0
-  vertexScaling: 10
+  vertexScaling: 20
   sea_choppy: 4.5
   sea_level: 0.75
   sea_speed: 1.05

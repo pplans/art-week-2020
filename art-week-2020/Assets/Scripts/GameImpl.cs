@@ -30,7 +30,7 @@ public class GameImpl : Game
 		// update dudes
 		m_player.UpdateCharacter();
 
-		if (m_player.IsAlive() == false)
+		if (m_player.IsAlive == false)
 		{
 			loadLevel.LoadLevelX(0);
 		}

@@ -8,7 +8,7 @@ namespace Assets.Scripts.Base.Characters
     {
         #region Members
 
-        protected bool IsAlive
+        public bool IsAlive
         {
             get;
             set;

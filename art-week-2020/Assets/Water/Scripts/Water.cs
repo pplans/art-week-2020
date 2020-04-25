@@ -16,6 +16,9 @@ public class Water : MonoBehaviour
 	private MeshRenderer m_meshRenderer;
 	public Material m_material;
 	public float timeScale;
+	public Camera m_mainCamera;
+
+	private int m_width = 10;
 
 	private float time;
 
@@ -52,7 +55,9 @@ public class Water : MonoBehaviour
 	{
 		Clear();
 		Offset = Vector3.zero;
-		Generate(10, 1.0f, -1.0f);
+		Generate(m_width, 1.0f, -1.0f);
+		//Material material = m_meshFilter.GetComponent<Material>();
+		//material.SetTexture("_CameraDepthTex", m_mainCamera.depthTextureMode.Depth);
 	}
 
 	void Clear()
@@ -231,12 +236,36 @@ public class Water : MonoBehaviour
 		Mesh mesh = GetComponent<MeshFilter>().mesh;
 		Vector3[] vertices = mesh.vertices;
 		Vector3[] normals = mesh.normals;
+		Vector2[] uvs = mesh.uv;
 		int i = 0;
 		while (i < vertices.Length/2)
 		{
 			GetSurfacePosAndNormalForWPos (vertices [i], out vertices [i], out normals [i]);
 			i++;
 		}
+		// Iterate over each face (here assuming triangles)
+		/*int nbFaces = m_width * m_width;
+		for (int index = 0; index < nbFaces; index += 3)
+		{
+			// Get the three vertices bounding this triangle.
+			Vector3 v1 = vertices[mesh.triangles[index]];
+			Vector3 v2 = vertices[mesh.triangles[index + 1]];
+			Vector3 v3 = vertices[mesh.triangles[index + 2]];
+
+			// Compute a vector perpendicular to the face.
+			Vector3 normal = Vector3.Cross(v3 - v1, v2 - v1);
+
+			// Form a rotation that points the z+ axis in this perpendicular direction.
+			// Multiplying by the inverse will flatten the triangle into an xy plane.
+			Quaternion rotation = Quaternion.Inverse(Quaternion.LookRotation(normal));
+
+			// Assign the uvs, applying a scale factor to control the texture tiling.
+			float scale = 1f;
+			uvs[mesh.triangles[index]] = (Vector2)(rotation * v1) * scale;
+			uvs[mesh.triangles[index + 1]] = (Vector2)(rotation * v2) * scale;
+			uvs[mesh.triangles[index + 2]] = (Vector2)(rotation * v3) * scale;
+		}*/
+		mesh.uv = uvs;
 		mesh.vertices = vertices;
 		mesh.normals = normals;
 		mesh.RecalculateBounds();

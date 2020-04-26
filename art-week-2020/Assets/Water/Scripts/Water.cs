@@ -235,7 +235,7 @@ public class Water : MonoBehaviour
 	public void LateUpdate()
 	{
 		Material material = GetComponent<Renderer>().material;
-		material.SetVector("_Direction", new Vector4(Direction.x, Direction.y, DirectionSpeed.x, DirectionSpeed.y) * sea_offset_uvfactor);
+		material.SetVector("_Offset", new Vector4(Offset.x, 0f, Offset.z, 0f));
 	}
 
 	void Update()

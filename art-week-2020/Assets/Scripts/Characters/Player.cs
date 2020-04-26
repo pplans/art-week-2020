@@ -52,6 +52,8 @@ namespace Assets.Scripts.Characters
         #region Methods
         public override bool IsPlayer() { return true; }
 
+		private Vector2 PlayerOffset = new Vector2(0, 0);
+
         public override void UpdateCharacter()
         {
             base.UpdateCharacter(); // Call parent update
@@ -68,9 +70,12 @@ namespace Assets.Scripts.Characters
             var newPos = new Vector3(pos.x, y, pos.y);
             transform.position = Vector3.MoveTowards(transform.position, newPos, Time.deltaTime);
 
-            water.Offset = transform.position;
-            water.DirectionSpeed = new Vector2(Speed, Speed);
-            water.Direction = GetDirection();
+            water.Offset = new Vector3(PlayerOffset.x, 0f, PlayerOffset.y);
+            //water.DirectionSpeed = new Vector2(Speed, Speed);
+			Vector3 dir = GetDirection();
+			//water.Direction = new Vector2(dir.x, dir.z);
+
+			PlayerOffset += (new Vector3(dir.x, dir.y)) * (new Vector2(0.01f, 0.01f));
         }
 
         public void AddScore(int amount)

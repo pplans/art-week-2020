@@ -262,9 +262,9 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1395867601 stripped
+--- !u!114 &1662980488 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2814853784209766002, guid: 2a0265e88bc725d4188a1ce67f3620ec, type: 3}
+  m_CorrespondingSourceObject: {fileID: 1411780022458410660, guid: 2a0265e88bc725d4188a1ce67f3620ec, type: 3}
   m_PrefabInstance: {fileID: 7466727126603589008}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
@@ -372,6 +372,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 620884614961939361, guid: 18252a90a5f84994a9f401bb2e130461, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 142.7002
+      objectReference: {fileID: 0}
     - target: {fileID: 620884616770442415, guid: 18252a90a5f84994a9f401bb2e130461, type: 3}
       propertyPath: m_Name
       value: Canvas - UI
@@ -608,7 +612,7 @@ PrefabInstance:
     - target: {fileID: 6852443581863465873, guid: 5efd5d739e588754688914d5d8c8e871, type: 3}
       propertyPath: m_player
       value: 
-      objectReference: {fileID: 1395867601}
+      objectReference: {fileID: 1662980488}
     - target: {fileID: 6852443581863465873, guid: 5efd5d739e588754688914d5d8c8e871, type: 3}
       propertyPath: Barrel
       value: 

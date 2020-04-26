@@ -14,6 +14,7 @@
 		_WaterSandDistance("Sand Distance", Range(0.1, 25.)) = 10.
 		_Wind("Wind", Vector) = (1, 1, 1, 1)
 		_Offset("Offset", Vector) = (1, 1, 1, 1)
+		_Dir("Dir", Vector) = (0, 0, 1, 1)
     }
     SubShader
     {
@@ -63,6 +64,7 @@
 			float4 _HighSeaColor;
 			float4 _Wind;
 			float4 _Offset;
+			float4 _Dir;
 			float _WaterFadeDistance;
 			float _WaterSandDistance;
 
@@ -129,16 +131,17 @@
 				float sceneAlpha = 1.-min(_WaterFadeDistance, LinearEyeDepth(oDepth) - vz) / _WaterFadeDistance;
 				float sandAlpha = 1. - min(_WaterFadeDistance, _WaterSandDistance) / _WaterFadeDistance;
 
+				float2 uv = (i.uv + _Offset.xz)*_TileNormTex.xy;// - normalize(_Dir.xy)* _Dir.zw*_Time.xx;
                 fixed3 Ndet = lerp(
-								UnpackNormal(tex2D(_NormTex, (i.uv + _Offset.xz)*_TileNormTex.xy +_Wind.xy*_Time.xx))
-								, UnpackNormal(tex2D(_Norm2Tex, (i.uv + _Offset.xz)*_TileNormTex.xy - _Wind.xy*_Time.xx))
+								UnpackNormal(tex2D(_NormTex,  uv+_Wind.xy*_Time.xx))
+								, UnpackNormal(tex2D(_Norm2Tex, uv - _Wind.xy*_Time.xx))
 								, 0.5);
 				float3 N = normalize(i.N*float3(10., 1., 10.)+ Ndet);
 				float3 L = normalize(_LightDir);
 
 				float2 disp = 0.1*Ndet.xz;
 
-				float3 sand = tex2D(_SandTex, (i.uv + _Offset.xz)*10. + disp).rgb;
+				float3 sand = tex2D(_SandTex, uv*10. + disp).rgb;
 
 				float4 col = float4(sand, 0.);
 				float Ldot = max(0., dot(N, L));

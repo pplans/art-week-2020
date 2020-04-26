@@ -75,7 +75,10 @@ namespace Assets.Scripts.Characters
 			Vector3 dir = GetDirection();
 			//water.Direction = new Vector2(dir.x, dir.z);
 
-			PlayerOffset += (new Vector3(dir.x, dir.y)) * (new Vector2(0.01f, 0.01f));
+			water.Direction = new Vector2(transform.forward.x, transform.forward.z);
+			water.DirectionSpeed = new Vector2(0.00001f, 0.00001f);
+
+			PlayerOffset += (new Vector2(transform.forward.x, transform.forward.z)) * (new Vector2(0.001f, 0.001f));
         }
 
         public void AddScore(int amount)

@@ -10,7 +10,7 @@ namespace Assets.Scripts.Characters
         #endregion
 
         #region UnityEvents
-        public override void Awake()
+        public new void Awake()
         {
         }
 

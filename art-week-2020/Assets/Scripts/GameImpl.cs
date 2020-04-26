@@ -19,7 +19,9 @@ public class GameImpl : Game
 	{
 		action.performed += InputPlayer;
 		action.Enable();
-	}
+
+        
+    }
 
 	private void InputPlayer(InputAction.CallbackContext callbackContext)
 	{
@@ -32,7 +34,7 @@ public class GameImpl : Game
 
 		if (m_player.IsAlive == false)
 		{
-			loadLevel.LoadLevelX(0);
+			
 		}
 
 		foreach (Character p in m_characters)

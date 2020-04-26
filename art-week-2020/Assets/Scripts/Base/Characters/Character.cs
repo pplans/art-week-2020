@@ -34,8 +34,9 @@ namespace Assets.Scripts.Base.Characters
         #endregion
 
         #region UnityEvents
-        public virtual void Awake()
+        public new void Awake()
         {
+            base.Awake();
             IsAlive = true;
             Life = MaxLife;
             Speed = BaseSpeed;

@@ -282,7 +282,7 @@ public class Water : MonoBehaviour
 		sea_speed = Mathf.Lerp(PresetNormal.speed, PresetHuge.speed, s);
 	}
 
-	float getHeightAtPoint(Vector2 p, out Vector3 normal)
+	public float getHeightAtPoint(Vector2 p, out Vector3 normal)
 	{
 		Mesh mesh = GetComponent<MeshFilter>().mesh;
 		Vector3[] vertices = mesh.vertices;

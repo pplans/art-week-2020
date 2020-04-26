@@ -1,5 +1,9 @@
-﻿using Assets.Scripts.Base.Characters;
+﻿using System.Numerics;
+using Assets.Scripts.Base.Characters;
 using UnityEngine;
+using Quaternion = UnityEngine.Quaternion;
+using Vector2 = UnityEngine.Vector2;
+using Vector3 = UnityEngine.Vector3;
 
 namespace Assets.Scripts.Characters
 {
@@ -22,16 +26,19 @@ namespace Assets.Scripts.Characters
         private Rigidbody _rigidbody;
         private readonly Vector3 _eulerAngleVelocity = new Vector3(0, 100, 0);
 
+        [SerializeField]
+        public float Inertia;
 
-		public Rigidbody canonballPrefab;
+        public Rigidbody canonballPrefab;
 
-		#endregion
+        #endregion
 
-		#region UnityEvents
-		public override void Awake()
+        #region UnityEvents
+        public new void Awake()
         {
             base.Awake(); // Call parent init
             _rigidbody = GetComponent<Rigidbody>();
+            inertia = Inertia;
         }
 
         public void Start()
@@ -46,7 +53,15 @@ namespace Assets.Scripts.Characters
         {
             base.UpdateCharacter(); // Call parent update
 
+            inertia = Inertia;
+
             ManageInput();
+
+            var pos = new Vector2(transform.position.x, transform.position.z);
+            Vector3 normal;
+            var y = water.getHeightAtPoint(pos, out normal) + 2;
+            var newPos = new Vector3(pos.x, y, pos.y);
+            transform.position = Vector3.MoveTowards(transform.position, newPos, Time.deltaTime);
         }
 
         public void AddScore(int amount)
@@ -62,17 +77,17 @@ namespace Assets.Scripts.Characters
             if (_vertical != 0)
             {
                 _rigidbody.MovePosition(transform.position + transform.forward * Speed * _vertical * Time.deltaTime);
-			}
+            }
 
             if (_horizontal != 0)
             {
                 Quaternion deltaRotation = Quaternion.Euler(_eulerAngleVelocity * _horizontal * Time.deltaTime * _rotationSpeed);
                 _rigidbody.MoveRotation(_rigidbody.rotation * deltaRotation);
-			}
+            }
 
-            if(Input.GetButtonDown("Fire1") || Input.GetButtonDown("Fire2"))
+            if (Input.GetButtonDown("Fire1") || Input.GetButtonDown("Fire2"))
             {
-				// Instantiate the projectile at the position and rotation of this transform
+                // Instantiate the projectile at the position and rotation of this transform
 				Rigidbody clone;
 				clone = Instantiate(canonballPrefab, transform.position, transform.rotation);
 				clone.transform.forward = Input.GetButtonDown("Fire1")?transform.right : transform.right * -1;

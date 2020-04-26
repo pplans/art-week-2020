@@ -55,7 +55,7 @@ namespace Assets.Scripts.Base.Characters
             UpdateSpeed();
         }
 
-        private void UpdateEffects()
+        protected void UpdateEffects()
         {
             for (var i = Effects.Count - 1; i >= 0; i--)
             {

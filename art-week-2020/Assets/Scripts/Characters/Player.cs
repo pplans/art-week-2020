@@ -4,6 +4,7 @@ using UnityEngine;
 using Quaternion = UnityEngine.Quaternion;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
+using Vector4 = UnityEngine.Vector4;
 
 namespace Assets.Scripts.Characters
 {
@@ -18,13 +19,14 @@ namespace Assets.Scripts.Characters
         }
 
         [SerializeField]
-        private readonly float _rotationSpeed = 1.0F;
+        private readonly float _rotationSpeed = 100.0F;
 
         private float _horizontal;
         private float _vertical;
+        private Quaternion IntentRotation;
 
         private Rigidbody _rigidbody;
-        private readonly Vector3 _eulerAngleVelocity = new Vector3(0, 100, 0);
+        private readonly Vector3 _eulerAngleVelocity = new Vector3(0, 1, 0);
 
         [SerializeField]
         public float Inertia;
@@ -39,6 +41,7 @@ namespace Assets.Scripts.Characters
             base.Awake(); // Call parent init
             _rigidbody = GetComponent<Rigidbody>();
             inertia = Inertia;
+            IntentRotation = Quaternion.identity;
         }
 
         public void Start()
@@ -57,16 +60,27 @@ namespace Assets.Scripts.Characters
 
             ManageInput();
 
+            ManageWaves();
+
             var pos = new Vector2(transform.position.x, transform.position.z);
             Vector3 normal;
             var y = water.getHeightAtPoint(pos, out normal) + 2;
             var newPos = new Vector3(pos.x, y, pos.y);
             transform.position = Vector3.MoveTowards(transform.position, newPos, Time.deltaTime);
+
+            water.Offset = transform.position;
+            water.DirectionSpeed = new Vector2(Speed, Speed);
+            water.Direction = GetDirection();
         }
 
         public void AddScore(int amount)
         {
             Score += amount;
+        }
+
+        public Vector3 GetDirection()
+        {
+            return Quaternion.Euler(0, -90, 0) * transform.forward;
         }
 
         private void ManageInput()
@@ -81,8 +95,7 @@ namespace Assets.Scripts.Characters
 
             if (_horizontal != 0)
             {
-                Quaternion deltaRotation = Quaternion.Euler(_eulerAngleVelocity * _horizontal * Time.deltaTime * _rotationSpeed);
-                _rigidbody.MoveRotation(_rigidbody.rotation * deltaRotation);
+                IntentRotation = Quaternion.Euler(_eulerAngleVelocity * _horizontal * Time.deltaTime * _rotationSpeed);
             }
 
             if (Input.GetButtonDown("Fire1") || Input.GetButtonDown("Fire2"))
@@ -94,6 +107,13 @@ namespace Assets.Scripts.Characters
 				clone.transform.parent = transform;
 			}
         }
+
+        private void ManageWaves()
+        {
+            var wavesRotation = GetWavesRotation();
+            _rigidbody.MoveRotation(Quaternion.Slerp(_rigidbody.rotation, wavesRotation, 0.5f) * IntentRotation);
+        }
+
         #endregion
     }
 }

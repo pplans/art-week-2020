@@ -25,7 +25,7 @@ namespace Assets.Scripts.Base.Characters
         [SerializeField]
         protected float MinSpeed;
 
-        protected float Speed;
+        public float Speed;
 
         [SerializeField]
         protected float BonusSpeed;

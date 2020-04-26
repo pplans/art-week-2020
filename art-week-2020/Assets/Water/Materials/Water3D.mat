@@ -119,12 +119,12 @@ Material:
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
     - _HighSeaColor: {r: 0, g: 0.8301887, b: 0.55967784, a: 1}
     - _LightColor: {r: 1, g: 1, b: 1, a: 1}
-    - _LightDir: {r: 0, g: 1, b: 0, a: 0}
+    - _LightDir: {r: -1, g: 0, b: -1, a: 0}
     - _LowSeaColor: {r: 0.0918921, g: 0.16841182, b: 0.5566037, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
     - _SideColor: {r: 0.45882353, g: 0.8666667, b: 0.9490196, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
     - _SpeedBoatWind: {r: 1, g: 1, b: 1, a: 1}
-    - _TileNormTex: {r: 2, g: 2, b: 0, a: 0}
+    - _TileNormTex: {r: 4, g: 4, b: 0, a: 0}
     - _Wind: {r: 0.4, g: 0.4, b: 1.44, a: 1.43}
   m_BuildTextureStacks: []

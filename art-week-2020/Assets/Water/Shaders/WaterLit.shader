@@ -16,8 +16,10 @@
     }
     SubShader
     {
-		Tags {"Queue" = "Transparent" "IgnoreProjector" = "True" "RenderType" = "Transparent"}
+		//Tags {"Queue" = "Transparent" "IgnoreProjector" = "True" "RenderType" = "Transparent"}
+		Tags { "RenderType" = "Transparent"}
         LOD 100
+		ZWrite Off
 
         Pass
         {
@@ -44,7 +46,7 @@
                 UNITY_FOG_COORDS(1)
 				float3 N : NORMAL;
                 float4 vertex : SV_POSITION;
-				float4 wVertex : TEXCOORD1;
+				float4 objectPos : TEXCOORD1;
 				float4 data : TEXCOORD2;
 				float4 screenPos : TEXCOORD3;
             };
@@ -69,7 +71,7 @@
                 v2f o = (v2f)0;
 				float3 NXYZ = normalize(float3(v.NXY.xy, v.NZ.x));
 				o.data.x = dot(NXYZ, float3(0.0, 1.0, 0.0));
-				o.wVertex = v.vertex;
+				o.objectPos = v.vertex;
 				o.N = v.N;
                 o.vertex = UnityObjectToClipPos(v.vertex);
 				o.screenPos = ComputeScreenPos(o.vertex);
@@ -118,19 +120,17 @@
 				return 1.-1.0 / (z * rawdepth + w);
 			}
 
-            fixed4 frag (v2f i) : SV_Target
+			fixed4 frag (v2f i) : SV_Target
             {
 				// sample depth
 				float2 screenUV = i.screenPos.xy / i.screenPos.w;
+				return tex2D(_CameraOpaqueTexture, screenUV);
 				float oDepth = UNITY_SAMPLE_DEPTH(tex2D(_CameraDepthTexture, screenUV));
-				float vz = abs(UnityObjectToViewPos(i.wVertex).z);
+				float vz = abs(UnityObjectToViewPos(i.objectPos).z);
 				float sceneAlpha = 1.-min(_WaterFadeDistance, LinearEyeDepth(oDepth) - vz) / _WaterFadeDistance;
 				float sandAlpha = 1. - min(_WaterFadeDistance, _WaterSandDistance) / _WaterFadeDistance;
 
-                fixed3 Ndet = lerp(
-								UnpackNormal(tex2D(_NormTex, i.uv*_TileNormTex.xy+_Wind.xy*_Time.xx))
-								, UnpackNormal(tex2D(_Norm2Tex, i.uv*_TileNormTex.xy - _Wind.xy*_Time.xx))
-								, 0.5);
+                fixed3 Ndet = normalize(UnpackNormal(tex2D(_NormTex, i.uv*_TileNormTex.xy+_Wind.xy*_Time.xx)) + UnpackNormal(tex2D(_Norm2Tex, i.uv*_TileNormTex.xy - _Wind.xy*_Time.xx)));
 				float3 N = normalize(i.N*float3(10., 1., 10.)+ Ndet);
 				float3 L = normalize(_LightDir);
 
@@ -147,12 +147,13 @@
 				sand = lerp(sand, float3(0., 0., 0.), smoothstep(0., 1., saturate((1. - LinearEyeDepth(oDepth)*0.01))));
 				col.rgb = lerp(
 							lerp(
-								lerp(_LowSeaColor, _HighSeaColor, Remap01(i.wVertex.y, 0., 5.))
+								lerp(_LowSeaColor, _HighSeaColor, Remap01(i.objectPos.y, 0., 5.))
 								, sand//*Ldot
 								, sandAlpha*F//saturate(1.-(i.wVertex.y))*.25
 							)
-							, tex2D(_CameraOpaqueTexture, screenUV+ 0.2*disp).rgb
+							, tex2D(_CameraOpaqueTexture, screenUV+ 0.*disp).rgb
 							, sceneAlpha);
+				return tex2D(_CameraOpaqueTexture, screenUV);
 
 				if (i.data.x > 0.99)
 				{
@@ -161,11 +162,13 @@
 
                 // apply fog
                 UNITY_APPLY_FOG(i.fogCoord, col);
-				//col.r = col.g = col.b = sandDepth;
+				//col.r = col.g = col.b = (LinearEyeDepth(oDepth) - vz)*.00021;
 				//col.rg = i.uv;
-                return col;
+				col.a = 1.;
+				return col;
             }
             ENDCG
         }
     }
+	FallBack "Hidden/InternalErrorShader"
 }

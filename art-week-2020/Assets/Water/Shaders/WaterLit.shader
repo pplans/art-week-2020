@@ -145,14 +145,20 @@
 				float Sdot = max(0., dot(N, H));
 				float F = Fresnel(1., 1.07, Ldot);
 				sand = lerp(sand, float3(0., 0., 0.), smoothstep(0., 1., saturate((1. - LinearEyeDepth(oDepth)*0.01))));
+
+				col.rgb =
+					lerp(
+						lerp(_LowSeaColor, _HighSeaColor, Remap01(i.wVertex.y, 0., 5.))
+						, sand//*Ldot
+						, sandAlpha*F//saturate(1.-(i.wVertex.y))*.25
+					);
+				// disabled, bad flow on cameras no time
+				#if 0
 				col.rgb = lerp(
-							lerp(
-								lerp(_LowSeaColor, _HighSeaColor, Remap01(i.wVertex.y, 0., 5.))
-								, sand//*Ldot
-								, sandAlpha*F//saturate(1.-(i.wVertex.y))*.25
-							)
+							col.rgb
 							, tex2D(_CameraOpaqueTexture, screenUV+ 0.2*disp).rgb
 							, sceneAlpha);
+				#endif
 
 				if (i.data.x > 0.99)
 				{

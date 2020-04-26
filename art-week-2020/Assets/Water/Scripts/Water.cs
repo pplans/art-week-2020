@@ -48,8 +48,9 @@ public class Water : MonoBehaviour
 		public const float offset_uvfactor = 0.1f;
 	};
 
-	public Vector3 Offset;
-
+	public Vector2 Offset;
+	public Vector2 Direction;
+	public Vector2 DirectionSpeed;
 	// Use this for initialization
 	void Start ()
 	{
@@ -231,7 +232,13 @@ public class Water : MonoBehaviour
 		GetComponent<MeshFilter>().mesh = m_mesh;
 	}
 
-    void Update()
+	public void LateUpdate()
+	{
+		Material material = GetComponent<Renderer>().material;
+		material.SetVector("_Direction", new Vector4(Direction.x, Direction.y, DirectionSpeed.x, DirectionSpeed.y) * sea_offset_uvfactor);
+	}
+
+	void Update()
 	{
 		Mesh mesh = GetComponent<MeshFilter>().mesh;
 		Vector3[] vertices = mesh.vertices;

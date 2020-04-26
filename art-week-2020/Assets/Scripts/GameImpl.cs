@@ -15,12 +15,18 @@ public class GameImpl : Game
 
     public Player m_player = null;
 
+    public GameObject Barrel;
+    public GameObject Crate;
+
+    public int NbBarrels;
+    public int NbCrates;
+
 	public void Start()
 	{
 		action.performed += InputPlayer;
 		action.Enable();
 
-        
+        InstatiateObjects(NbCrates, NbBarrels);
     }
 
 	private void InputPlayer(InputAction.CallbackContext callbackContext)
@@ -29,6 +35,9 @@ public class GameImpl : Game
 
 	public override void UpdateGame()
 	{
+        if (Input.GetAxis("Cancel") > 0)
+            Application.Quit();
+
 		// update dudes
 		m_player.UpdateCharacter();
 
@@ -42,4 +51,14 @@ public class GameImpl : Game
 			p.UpdateCharacter();
 		}
 	}
+
+    private void InstatiateObjects(int crates, int barrels)
+    {
+        float minRange = -900;
+        float maxRange = 900;
+        for (int i = 0; i < crates; i++)
+        {
+            Instantiate(Crate, new Vector3(Random.Range(minRange, maxRange), 0f, Random.Range(minRange, maxRange)), Crate.transform.rotation);
+        }
+    }
 }

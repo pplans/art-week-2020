@@ -56,6 +56,10 @@ MonoBehaviour:
   loadLevel: {fileID: 0}
   m_characters: []
   m_player: {fileID: 0}
+  Barrel: {fileID: 0}
+  Crate: {fileID: 0}
+  NbBarrels: 500
+  NbCrates: 500
 --- !u!114 &6852443581863465875
 MonoBehaviour:
   m_ObjectHideFlags: 0

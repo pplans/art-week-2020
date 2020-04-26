@@ -162,6 +162,10 @@ PrefabInstance:
       propertyPath: Inertia
       value: 200
       objectReference: {fileID: 0}
+    - target: {fileID: 3785267691671834875, guid: e204141bc840a6d4bb99a18fdb4072dd, type: 3}
+      propertyPath: MinSpeed
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4273561316305961238, guid: e204141bc840a6d4bb99a18fdb4072dd, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -176,7 +180,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4273561316305961238, guid: e204141bc840a6d4bb99a18fdb4072dd, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4273561316305961238, guid: e204141bc840a6d4bb99a18fdb4072dd, type: 3}
       propertyPath: m_LocalRotation.y
@@ -184,7 +188,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4273561316305961238, guid: e204141bc840a6d4bb99a18fdb4072dd, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4273561316305961238, guid: e204141bc840a6d4bb99a18fdb4072dd, type: 3}
       propertyPath: m_LocalRotation.w

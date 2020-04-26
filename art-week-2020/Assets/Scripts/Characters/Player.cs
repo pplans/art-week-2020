@@ -70,12 +70,12 @@ namespace Assets.Scripts.Characters
                 _rigidbody.MoveRotation(_rigidbody.rotation * deltaRotation);
 			}
 
-            if(Input.GetButtonDown("Fire1"))
+            if(Input.GetButtonDown("Fire1") || Input.GetButtonDown("Fire2"))
             {
 				// Instantiate the projectile at the position and rotation of this transform
 				Rigidbody clone;
 				clone = Instantiate(canonballPrefab, transform.position, transform.rotation);
-				clone.transform.forward = transform.right;
+				clone.transform.forward = Input.GetButtonDown("Fire1")?transform.right : transform.right * -1;
 			}
         }
         #endregion

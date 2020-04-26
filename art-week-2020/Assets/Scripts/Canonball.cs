@@ -5,7 +5,7 @@ using UnityEngine;
 public class Canonball : MonoBehaviour
 {
 	[SerializeField]
-	public float _speed;
+	public float _speed = 50.0f;
 
 	private Rigidbody rb;
 	// Start is called before the first frame update

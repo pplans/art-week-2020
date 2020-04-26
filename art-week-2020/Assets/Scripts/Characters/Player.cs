@@ -1,4 +1,5 @@
 ﻿using System.Numerics;
+using System.Runtime.ExceptionServices;
 using Assets.Scripts.Base.Characters;
 using UnityEngine;
 using Quaternion = UnityEngine.Quaternion;
@@ -47,6 +48,17 @@ namespace Assets.Scripts.Characters
         public void Start()
         {
         }
+
+        public void OnTriggerEnter(Collider other)
+        {
+            var gob = other.gameObject;
+            if (gob.tag == "FloatingObject")
+            {
+                AddScore(50);
+                Destroy(gob);
+            }
+
+        }
         #endregion
 
         #region Methods
@@ -66,19 +78,20 @@ namespace Assets.Scripts.Characters
 
             var pos = new Vector2(transform.position.x, transform.position.z);
             Vector3 normal;
-            var y = water.getHeightAtPoint(pos, out normal) + 2;
+            var y = water.getHeightAtPoint(pos, out normal);
             var newPos = new Vector3(pos.x, y, pos.y);
             transform.position = Vector3.MoveTowards(transform.position, newPos, Time.deltaTime);
 
             water.Offset = new Vector3(PlayerOffset.x, 0f, PlayerOffset.y);
             //water.DirectionSpeed = new Vector2(Speed, Speed);
 			Vector3 dir = GetDirection();
-			//water.Direction = new Vector2(dir.x, dir.z);
+            //water.Direction = new Vector2(dir.x, dir.z);
 
-			water.Direction = new Vector2(transform.forward.x, transform.forward.z);
-			water.DirectionSpeed = new Vector2(0.00001f, 0.00001f);
+            var direction = GetDirection();
+            water.Direction = new Vector2(direction.x, direction.z);
+			water.DirectionSpeed = new Vector2(Speed * Time.deltaTime, Speed * Time.deltaTime);
 
-			PlayerOffset += (new Vector2(transform.forward.x, transform.forward.z)) * (new Vector2(0.001f, 0.001f));
+			PlayerOffset += water.Direction * water.DirectionSpeed * Time.deltaTime * 0.25f;
         }
 
         public void AddScore(int amount)

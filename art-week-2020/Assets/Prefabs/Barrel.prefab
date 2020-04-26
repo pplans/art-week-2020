@@ -91,9 +91,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5720121598380250379}
   - component: {fileID: 3356652387074048531}
+  - component: {fileID: 5374757346833180019}
   m_Layer: 0
   m_Name: Barrel
-  m_TagString: Untagged
+  m_TagString: FloatingObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -125,3 +126,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df4de20e18a2f61409200e42a7b50696, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &5374757346833180019
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8735485267280422680}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 40.14531, y: 46.773624, z: 43.111416}
+  m_Center: {x: 0.41134357, y: 22.886705, z: 1.2365627}

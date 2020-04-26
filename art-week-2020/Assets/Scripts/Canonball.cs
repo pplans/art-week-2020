@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Assets.Scripts.Characters;
 
 public class Canonball : MonoBehaviour
 {
@@ -21,8 +22,20 @@ public class Canonball : MonoBehaviour
 		rb.MovePosition(transform.position + transform.forward * _speed * Time.deltaTime);
 	}
 
-	void OnCollisionEnter()
+	void OnTriggerEnter(Collider other)
 	{
+		WorldObject o = other.gameObject.GetComponent<WorldObject>() as WorldObject;
+
+		if(o.IsIA()){
+
+			WorldObject parent = transform.parent.GetComponent<WorldObject>() as WorldObject;
+			if(parent.IsPlayer()){
+				Player player = parent as Player;
+				player.AddScore(10);
+				Debug.Log(player.Score);
+			}
+		}
+
 		Object.Destroy(transform.gameObject);
 	}
 }

@@ -76,6 +76,7 @@ namespace Assets.Scripts.Characters
 				Rigidbody clone;
 				clone = Instantiate(canonballPrefab, transform.position, transform.rotation);
 				clone.transform.forward = Input.GetButtonDown("Fire1")?transform.right : transform.right * -1;
+				clone.transform.parent = transform;
 			}
         }
         #endregion

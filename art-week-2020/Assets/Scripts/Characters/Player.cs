@@ -14,7 +14,7 @@ namespace Assets.Scripts.Characters
         }
 
         [SerializeField]
-        private readonly float _rotationSpeed = 100.0F;
+        private readonly float _rotationSpeed = 1.0F;
 
         private float _horizontal;
         private float _vertical;
@@ -22,10 +22,13 @@ namespace Assets.Scripts.Characters
         private Rigidbody _rigidbody;
         private readonly Vector3 _eulerAngleVelocity = new Vector3(0, 100, 0);
 
-        #endregion
 
-        #region UnityEvents
-        public override void Awake()
+		public Rigidbody canonballPrefab;
+
+		#endregion
+
+		#region UnityEvents
+		public override void Awake()
         {
             base.Awake(); // Call parent init
             _rigidbody = GetComponent<Rigidbody>();
@@ -42,7 +45,7 @@ namespace Assets.Scripts.Characters
         public override void UpdateCharacter()
         {
             base.UpdateCharacter(); // Call parent update
-            
+
             ManageInput();
         }
 
@@ -59,13 +62,21 @@ namespace Assets.Scripts.Characters
             if (_vertical != 0)
             {
                 _rigidbody.MovePosition(transform.position + transform.forward * Speed * _vertical * Time.deltaTime);
-            }
+			}
 
             if (_horizontal != 0)
             {
                 Quaternion deltaRotation = Quaternion.Euler(_eulerAngleVelocity * _horizontal * Time.deltaTime * _rotationSpeed);
                 _rigidbody.MoveRotation(_rigidbody.rotation * deltaRotation);
-            }
+			}
+
+            if(Input.GetButtonDown("Fire1"))
+            {
+				// Instantiate the projectile at the position and rotation of this transform
+				Rigidbody clone;
+				clone = Instantiate(canonballPrefab, transform.position, transform.rotation);
+				clone.transform.forward = transform.right;
+			}
         }
         #endregion
     }

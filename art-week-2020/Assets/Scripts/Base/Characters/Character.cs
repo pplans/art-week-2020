@@ -58,6 +58,7 @@ namespace Assets.Scripts.Base.Characters
 
         protected void UpdateEffects()
         {
+			if (Effects == null) return;
             for (var i = Effects.Count - 1; i >= 0; i--)
             {
                 Effects[i].Update();

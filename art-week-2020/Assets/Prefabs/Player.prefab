@@ -179,6 +179,10 @@ PrefabInstance:
       propertyPath: MinSpeed
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 3785267691671834875, guid: e204141bc840a6d4bb99a18fdb4072dd, type: 3}
+      propertyPath: BaseSpeed
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4273561316305961238, guid: e204141bc840a6d4bb99a18fdb4072dd, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

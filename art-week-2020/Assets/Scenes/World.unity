@@ -196,6 +196,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85311974839d0df4fa1ba005c883b159, type: 3}
+--- !u!1 &893722533 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1605359690580634, guid: 85311974839d0df4fa1ba005c883b159, type: 3}
+  m_PrefabInstance: {fileID: 348365091}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &893722539
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 893722533}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 40, y: 108.37, z: 40}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &941674935 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1411780022458410660, guid: 2a0265e88bc725d4188a1ce67f3620ec, type: 3}
@@ -285,17 +303,17 @@ PrefabInstance:
       value: GameManager
       objectReference: {fileID: 0}
     - target: {fileID: 6852443581863465873, guid: 5efd5d739e588754688914d5d8c8e871, type: 3}
-      propertyPath: Crate
-      value: 
-      objectReference: {fileID: 3430353876362595984, guid: f9bb8bf2b36b94d4e8b142039c1102be, type: 3}
-    - target: {fileID: 6852443581863465873, guid: 5efd5d739e588754688914d5d8c8e871, type: 3}
-      propertyPath: Barrel
-      value: 
-      objectReference: {fileID: 8735485267280422680, guid: 1f7e1e2e453337d4598ed80bbe196fa2, type: 3}
-    - target: {fileID: 6852443581863465873, guid: 5efd5d739e588754688914d5d8c8e871, type: 3}
       propertyPath: m_player
       value: 
       objectReference: {fileID: 941674935}
+    - target: {fileID: 6852443581863465873, guid: 5efd5d739e588754688914d5d8c8e871, type: 3}
+      propertyPath: NbBarrels
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 6852443581863465873, guid: 5efd5d739e588754688914d5d8c8e871, type: 3}
+      propertyPath: NbCrates
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 6852443581863465874, guid: 5efd5d739e588754688914d5d8c8e871, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -408,7 +426,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 620884614961939361, guid: 18252a90a5f84994a9f401bb2e130461, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 142.7002
+      value: 143
+      objectReference: {fileID: 0}
+    - target: {fileID: 620884614961939361, guid: 18252a90a5f84994a9f401bb2e130461, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 626
       objectReference: {fileID: 0}
     - target: {fileID: 620884614961939366, guid: 18252a90a5f84994a9f401bb2e130461, type: 3}
       propertyPath: Player

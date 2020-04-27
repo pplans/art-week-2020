@@ -24,6 +24,10 @@ public class WorldObject : MonoBehaviour
                 var player = GameObject.Find("Player").GetComponentInChildren<Player>();
                 var direction = player.GetDirection();
                 transform.position = Vector3.MoveTowards(transform.position, transform.position + direction * -1, player.Speed * Time.deltaTime);
+                if (!water.GetComponent<BoxCollider>().bounds.Contains(transform.position))
+                {
+                    transform.position = new Vector3(transform.position.x, 0, transform.position.z);
+                }
             }
         }
     }
@@ -37,6 +41,6 @@ public class WorldObject : MonoBehaviour
     }
 
     public virtual bool IsPlayer() { return false; }
-	public virtual bool IsIA() { return false; }
-	public virtual bool IsObstacle() { return false; }
+    public virtual bool IsIA() { return false; }
+    public virtual bool IsObstacle() { return false; }
 }

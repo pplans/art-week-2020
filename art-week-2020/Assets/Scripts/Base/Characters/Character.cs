@@ -20,7 +20,7 @@ namespace Assets.Scripts.Base.Characters
         protected int Life;
 
         [SerializeField]
-        protected readonly float BaseSpeed;
+        protected float BaseSpeed;
 
         [SerializeField]
         protected float MinSpeed;

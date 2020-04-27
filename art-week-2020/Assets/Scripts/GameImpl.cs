@@ -60,5 +60,9 @@ public class GameImpl : Game
         {
             Instantiate(Crate, new Vector3(Random.Range(minRange, maxRange), 0f, Random.Range(minRange, maxRange)), Crate.transform.rotation);
         }
+        for (int i = 0; i < barrels; i++)
+        {
+            Instantiate(Barrel, new Vector3(Random.Range(minRange, maxRange), 0f, Random.Range(minRange, maxRange)), Barrel.transform.rotation);
+        }
     }
 }

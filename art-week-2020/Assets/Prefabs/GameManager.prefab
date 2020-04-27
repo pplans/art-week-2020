@@ -56,8 +56,8 @@ MonoBehaviour:
   loadLevel: {fileID: 0}
   m_characters: []
   m_player: {fileID: 0}
-  Barrel: {fileID: 0}
-  Crate: {fileID: 0}
+  Barrel: {fileID: 8735485267280422680, guid: 1f7e1e2e453337d4598ed80bbe196fa2, type: 3}
+  Crate: {fileID: 3430353876362595984, guid: f9bb8bf2b36b94d4e8b142039c1102be, type: 3}
   NbBarrels: 500
   NbCrates: 500
 --- !u!114 &6852443581863465875
